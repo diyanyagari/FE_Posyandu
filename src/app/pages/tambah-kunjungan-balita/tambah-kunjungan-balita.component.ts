@@ -58,7 +58,7 @@ export class TambahKunjunganBalitaComponent implements OnInit {
   }
 
   getUmur() {
-    let datenow = new Date();
+    let datenow = new Date(this.form.get('tgl_kunjungan').value);
     let birthday = new Date(this.dataBalita.tgl_lahir);
     let year = 0;
     if (datenow.getMonth() < birthday.getMonth()) {
@@ -88,55 +88,76 @@ export class TambahKunjunganBalitaComponent implements OnInit {
     this.kodeKunjungan = val;
   }
 
+  validateAllFormFields(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(field => {
+      const control = formGroup.get(field);
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
+        this.validateAllFormFields(control);
+      }
+    });
+  }
+
   onSave() {
     let datenow = new Date(this.form.get('tgl_kunjungan').value);
     let birthday = new Date(this.dataBalita.tgl_lahir);
-    let year = 0;
-    if (datenow.getMonth() < birthday.getMonth()) {
-      year = 1;
-    } else if ((datenow.getMonth() == birthday.getMonth()) && datenow.getDate() < birthday.getDate()) {
-      year = 1;
-    }
-    let umurTahun = datenow.getFullYear() - birthday.getFullYear() - year;
-    if (umurTahun < 0) {
-      umurTahun = 0;
-    }
-
-    let bulan;
-    if (datenow.getFullYear() - birthday.getFullYear() == 0) {
-      bulan = datenow.getMonth() - birthday.getMonth();
-    } else if (datenow.getFullYear() > birthday.getFullYear()) {
-      if (datenow.getMonth() > birthday.getMonth()) {
-        bulan = datenow.getMonth() - birthday.getMonth();
-      } else if (datenow.getMonth() < birthday.getMonth()) {
-        bulan = (12 - birthday.getMonth()) + datenow.getMonth()
+    if(datenow < birthday) {
+      this.toastr.warning('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Tanggal Kunjungan Melebihi Tanggal Lahir', '', {
+        closeButton: true,
+        enableHtml: true,
+        timeOut: 2000,
+        toastClass: "alert alert-warning alert-with-icon",
+        positionClass: 'toast-' + 'top' + '-' + 'right'
+      });
+    } else {
+      let year = 0;
+      if (datenow.getMonth() < birthday.getMonth()) {
+        year = 1;
+      } else if ((datenow.getMonth() == birthday.getMonth()) && datenow.getDate() < birthday.getDate()) {
+        year = 1;
       }
+      let umurTahun = datenow.getFullYear() - birthday.getFullYear() - year;
+      if (umurTahun < 0) {
+        umurTahun = 0;
+      }
+  
+      let bulan;
+      if (datenow.getFullYear() - birthday.getFullYear() == 0) {
+        bulan = datenow.getMonth() - birthday.getMonth();
+      } else if (datenow.getFullYear() > birthday.getFullYear()) {
+        if (datenow.getMonth() > birthday.getMonth()) {
+          bulan = datenow.getMonth() - birthday.getMonth();
+        } else if (datenow.getMonth() < birthday.getMonth()) {
+          bulan = (12 - birthday.getMonth()) + datenow.getMonth()
+        }
+      }
+  
+      let beratIdeal = 2 * (umurTahun + (bulan / 10)) + 8;
+      let toleransi = 2;
+      let beratSekarang = this.form.get('beratbadan').value
+      let sttsGizi;
+      if ((beratSekarang >= (beratIdeal - toleransi)) && (beratSekarang <= (beratIdeal + toleransi))) {
+        sttsGizi = 'Normal';
+      } else if (beratSekarang > beratIdeal + toleransi) {
+        sttsGizi = 'Obesitas';
+      } else if (beratSekarang < beratIdeal - toleransi) {
+        sttsGizi = 'Kurang Gizi';
+      }
+      let dataKirim = {
+        'tgl_kunjungan': this.form.get('tgl_kunjungan').value,
+        'id_balita': this.dataBalita.id_balita,
+        'id_jenis_kunjungan': this.form.get('id_jenis_kunjungan').value,
+        'beratbadan': this.form.get('beratbadan').value,
+        'tinggi': this.form.get('tinggi').value,
+        'jenisImunisasi': this.form.get('jenisImunisasi').value,
+        'keteranganPemberianVitamin': this.form.get('keteranganPemberianVitamin').value,
+        'sttsGizi': sttsGizi
+      }
+      this.api.add(this.url + 'insertKunjungan', dataKirim).subscribe(res => {
+        this.getKunjungan();
+      })
     }
-
-    let beratIdeal = 2 * (umurTahun + (bulan / 10)) + 8;
-    let toleransi = 2;
-    let beratSekarang = this.form.get('beratbadan').value
-    let sttsGizi;
-    if ((beratSekarang <= beratIdeal + toleransi) || (beratSekarang >= beratIdeal - toleransi)) {
-      sttsGizi = 'Normal';
-    } else if (beratSekarang > beratIdeal + toleransi) {
-      sttsGizi = 'Obesitas';
-    } else if (beratSekarang < beratIdeal - toleransi) {
-      sttsGizi = 'Kurang Gizi';
-    }
-    let dataKirim = {
-      'tgl_kunjungan': this.form.get('tgl_kunjungan').value,
-      'id_balita': this.dataBalita.id_balita,
-      'id_jenis_kunjungan': this.form.get('id_jenis_kunjungan').value,
-      'beratbadan': this.form.get('beratbadan').value,
-      'tinggi': this.form.get('tinggi').value,
-      'jenisImunisasi': this.form.get('jenisImunisasi').value,
-      'keteranganPemberianVitamin': this.form.get('keteranganPemberianVitamin').value,
-      'sttsGizi': sttsGizi
-    }
-    this.api.add(this.url + 'insertKunjungan', dataKirim).subscribe(res => {
-      this.getKunjungan();
-    })
   }
 
   getKunjungan() {

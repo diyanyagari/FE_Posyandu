@@ -17,7 +17,7 @@
               <div class=" col-md-3 px-md-1">
                 <div class=" form-group">
                   <label> Tanggal Kunjungan </label>
-                  <input class=" form-control" formControlName="tgl_kunjungan" placeholder="Tanggal Lahir"
+                  <input class=" form-control" (change)="getUmur()" formControlName="tgl_kunjungan" placeholder="Tanggal Lahir"
                     type="date" />
                 </div>
               </div>
@@ -109,7 +109,7 @@
               <tr *ngFor="let data of kunjungan">
                 <td>{{data.tgl_kunjungan | date:'dd-MMM-yyyy'}}</td>
                 <td>{{data.beratbadan}} Kg</td>
-                <td>{{data.tinggi}} Kg</td>
+                <td>{{data.tinggi}} Cm</td>
                 <td>{{data.jenisImunisasi}}</td>
                 <td>{{data.keteranganPemberianVit}}</td>
                 <td>{{data.sttsGizi}}</td>

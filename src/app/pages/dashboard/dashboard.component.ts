@@ -67,4 +67,9 @@ export class DashboardComponent implements OnInit {
     sessionStorage.setItem('data', JSON.stringify(data));
     this.router.navigate(['/tambah-kunjungan-balita'])
   }
+
+  riwayat(data) {
+    sessionStorage.setItem('data', JSON.stringify(data));
+    this.router.navigate(['/riwayat-balita'])
+  }
 }
