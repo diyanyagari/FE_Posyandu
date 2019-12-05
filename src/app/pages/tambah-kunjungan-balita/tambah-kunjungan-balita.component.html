@@ -1,0 +1,198 @@
+<div class=" content">
+  <div class=" row">
+    <div class=" col-md-12">
+      <div class=" card">
+        <div class=" card-header">
+          <h5 class=" title">Daftar Kunjungan</h5>
+        </div>
+        <div class=" card-body">
+          <form [formGroup]="form">
+            <div class=" row">
+              <div class=" col-md-4 pr-md-1">
+                <div class=" form-group">
+                  <label> Nama Balita </label>
+                  <input disabled class=" form-control" value="{{dataBalita.nama_balita}}" type="text" />
+                </div>
+              </div>
+              <div class=" col-md-3 px-md-1">
+                <div class=" form-group">
+                  <label> Tanggal Kunjungan </label>
+                  <input class=" form-control" formControlName="tgl_kunjungan" placeholder="Tanggal Lahir"
+                    type="date" />
+                </div>
+              </div>
+              <div class=" col-md-2 px-md-1">
+                <div class=" form-group">
+                  <label> Umur </label>
+                  <input disabled class=" form-control" value="{{umur}}" placeholder="Umur"
+                    type="text" />
+                </div>
+              </div>
+              <div class=" col-md-3 pr-md-1">
+                <div class=" form-group">
+                  <label> Jenis Kunjungan </label>
+                  <select [(ngModel)]="kodeKunjungan" (change)="onChange($event.target.value)" formControlName="id_jenis_kunjungan"
+                    class=" form-control">
+                    <option value="BB">Periksa BB dan Tinggi</option>
+                    <option value="IM">Imunisasi</option>
+                    <option value="PV">Pemberian Vitamin</option>
+                    <option value="CG">Cek status Gizi</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="kodeKunjungan == 'BB'" class=" row">
+              <div class=" col-md-6 pr-md-1">
+                <div class=" form-group">
+                  <label> Berat Badan </label>
+                  <input class=" form-control" formControlName="beratbadan" placeholder="Berat Badan" type="number" />
+                </div>
+              </div>
+              <div class=" col-md-6 px-md-1">
+                <div class=" form-group">
+                  <label> Tinggi </label>
+                  <input class=" form-control" formControlName="tinggi" placeholder="Tinggi" type="number" />
+                </div>
+              </div>
+            </div>
+            <div *ngIf="kodeKunjungan == 'IM'" class=" row">
+              <div class=" col-md-4 pr-md-1">
+                <div class=" form-group">
+                  <label> Jenis Imunisasi </label>
+                  <select formControlName="jenisImunisasi" class=" form-control">
+                    <option value="1">Imunisasi1</option>
+                    <option value="2">Imunisasi2</option>
+                    <option value="3">Imunisasi3</option>
+                    <option value="4">Imunisasi4</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="kodeKunjungan == 'PV'" class=" row">
+              <div class=" col-md-4 pr-md-1">
+                <div class=" form-group">
+                  <label> Keterangan Pemberian Vitamin </label>
+                  <input class=" form-control" formControlName="keteranganPemberianVitamin"
+                    placeholder="Keterangan Pemberian Vitamin" type="text" />
+                </div>
+              </div>
+            </div>
+            <div *ngIf="kodeKunjungan == 'CG'" class=" row">
+
+            </div>
+          </form>
+        </div>
+        <div class=" card-footer">
+          <button style="float: right;" (click)="onSave()" class=" btn btn-fill btn-danger" type="submit">Add</button>
+        </div>
+      </div>
+    </div>
+    <div class=" col-md-12">
+      <div class=" card">
+        <!-- <div class=" card-header">
+            <h5 class=" title">Daftar Kunjungan</h5>
+          </div> -->
+        <div class=" card-body">
+          <table class=" table tablesorter" id="">
+            <thead class=" text-primary">
+              <tr>
+                <th>Tanggal Kunjungan</th>
+                <th>Berat Badan</th>
+                <th>Tinggi</th>
+                <th>Jenis Imunisasi</th>
+                <th>Keterangan Pemberian Vitamin</th>
+                <th>Status Gizi</th>
+                <!-- <th class=" text-center">Salary</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of kunjungan">
+                <td>{{data.tgl_kunjungan | date:'dd-MMM-yyyy'}}</td>
+                <td>{{data.beratbadan}} Kg</td>
+                <td>{{data.tinggi}} Kg</td>
+                <td>{{data.jenisImunisasi}}</td>
+                <td>{{data.keteranganPemberianVit}}</td>
+                <td>{{data.sttsGizi}}</td>
+                <!-- <td class=" text-center">
+                  <i data-toggle="tooltip" (click)="tambahkunjunganbalita(data)" data-placement="top"
+                    title="Tambah Riwayat" class=" tim-icons icon-simple-add action-class"> </i>
+                  <i data-toggle="tooltip" data-placement="top" title="Riwayat"
+                    class=" tim-icons icon-book-bookmark action-class"> </i>
+                </td> -->
+              </tr>
+            </tbody>
+          </table>
+          <!-- <form [formGroup]="form">
+              <div class=" row">
+                <div class=" col-md-4 pr-md-1">
+                  <div class=" form-group">
+                    <label> Nama Balita </label>
+                    <input disabled class=" form-control" value="{{dataBalita.nama_balita}}" type="text" />
+                  </div>
+                </div>
+                <div class=" col-md-4 px-md-1">
+                  <div class=" form-group">
+                    <label> Tanggal Kunjungan </label>
+                    <input class=" form-control" placeholder="Tanggal Lahir" type="date" />
+                  </div>
+                </div>
+                <div class=" col-md-4 pr-md-1">
+                  <div class=" form-group">
+                    <label> Jenis Kunjungan </label>
+                    <select (change)="onChange($event.target.value)" class=" form-control">
+                      <option value="BB">Periksa BB dan Tinggi</option>
+                      <option value="IM">Imunisasi</option>
+                      <option value="PV">Pemberian Vitamin</option>
+                      <option value="CG">Cek status Gizi</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="kodeKunjungan == 'BB'" class=" row">
+                <div class=" col-md-6 pr-md-1">
+                  <div class=" form-group">
+                    <label> Berat Badan </label>
+                    <input class=" form-control" formControlName="nik_ayah" placeholder="Berat Badan" type="number" />
+                  </div>
+                </div>
+                <div class=" col-md-6 px-md-1">
+                  <div class=" form-group">
+                    <label> Tinggi </label>
+                    <input class=" form-control" formControlName="nama_ayah" placeholder="Tinggi" type="number" />
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="kodeKunjungan == 'IM'" class=" row">
+                <div class=" col-md-4 pr-md-1">
+                  <div class=" form-group">
+                    <label> Jenis Imunisasi </label>
+                    <select class=" form-control">
+                      <option value="1">Imunisasi1</option>
+                      <option value="2">Imunisasi2</option>
+                      <option value="3">Imunisasi3</option>
+                      <option value="4">Imunisasi4</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="kodeKunjungan == 'PV'" class=" row">
+                <div class=" col-md-4 pr-md-1">
+                  <div class=" form-group">
+                    <label> Keterangan Pemberian Vitamin </label>
+                    <input class=" form-control" formControlName="nama_ayah" placeholder="Keterangan Pemberian Vitamin"
+                      type="text" />
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="kodeKunjungan == 'CG'" class=" row">
+  
+              </div>
+            </form> -->
+        </div>
+        <!-- <div class=" card-footer">
+            <button style="float: right;" (click)="onSave()" class=" btn btn-fill btn-danger" type="submit">Add</button>
+          </div> -->
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,98 @@
+<div class=" content">
+  <div class=" row">
+    <div class=" col-md-12">
+      <div class=" card">
+        <div class=" card-header">
+          <h5 class=" title">Tambah Balita</h5>
+        </div>
+        <div class=" card-body">
+          <form [formGroup]="form">
+            <div class=" row">
+              <!-- <div class=" col-md-5 pr-md-1">
+                  <div class=" form-group">
+                    <label> Nama Balita </label>
+                    <input
+                      class=" form-control"
+                      disabled=""
+                      placeholder="Company"
+                      type="text"
+                      value="Creative Code Inc."
+                    />
+                  </div>
+                </div> -->
+              <div class=" col-md-8 pr-md-1">
+                <div class=" form-group">
+                  <label> Nama Balita </label>
+                  <input class=" form-control" formControlName="nama_balita" placeholder="Nama Balita" type="text" />
+                </div>
+              </div>
+              <div class=" col-md-2 px-md-1">
+                <div class=" form-group">
+                  <label> Tanggal Lahir </label>
+                  <input (change)="tglLahir()" class=" form-control" formControlName="tgl_lahir" placeholder="Tanggal Lahir" type="date" />
+                </div>
+              </div>
+              <div class=" col-md-2 pl-md-1">
+                <div class=" form-group">
+                  <label> Umur </label>
+                  <input disabled class=" form-control" formControlName="umur" placeholder="Umur" type="number" />
+                </div>
+              </div>
+            </div>
+            <div class=" row">
+              <div class=" col-md-12">
+                <div class=" form-group">
+                  <label> Alamat </label>
+                  <input class=" form-control" formControlName="alamat" placeholder="Alamat" type="textarea" />
+                </div>
+              </div>
+            </div>
+            <div class=" row">
+              <div class=" col-md-4 pr-md-1">
+                <div class=" form-group">
+                  <label> NIK Ayah </label>
+                  <input class=" form-control" formControlName="nik_ayah" placeholder="NIK Ayah" type="number" />
+                </div>
+              </div>
+              <div class=" col-md-4 px-md-1">
+                <div class=" form-group">
+                  <label> Nama Ayah </label>
+                  <input class=" form-control" formControlName="nama_ayah" placeholder="Nama Ayah" type="text" />
+                </div>
+              </div>
+              <div class=" col-md-4 pl-md-1">
+                <div class=" form-group">
+                  <label> No. Telepon Ayah </label>
+                  <input class=" form-control" formControlName="nama_ibu" placeholder="No. Telepon Ayah" type="number" />
+                </div>
+              </div>
+            </div>
+            <div class=" row">
+              <div class=" col-md-4 pr-md-1">
+                <div class=" form-group">
+                  <label> NIK Ibu </label>
+                  <input class=" form-control" formControlName="nik_ibu" placeholder="NIK Ibu" type="number" />
+                </div>
+              </div>
+              <div class=" col-md-4 px-md-1">
+                <div class=" form-group">
+                  <label> Nama Ibu </label>
+                  <input class=" form-control" formControlName="noHp_ayah" placeholder="Nama Ibu" type="text" />
+                </div>
+              </div>
+              <div class=" col-md-4 pl-md-1">
+                <div class=" form-group">
+                  <label> No. Telepon Ibu </label>
+                  <input class=" form-control" formControlName="noHp_ibu" placeholder="No. Telepon Ibu" type="number" />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class=" card-footer">
+          <button (click)="onSave()" class=" btn btn-fill btn-danger" type="submit">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

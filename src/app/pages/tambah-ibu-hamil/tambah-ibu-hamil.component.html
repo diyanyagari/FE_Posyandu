@@ -1,0 +1,60 @@
+<div class=" content">
+  <div class=" row">
+    <div class=" col-md-12">
+      <div class=" card">
+        <div class=" card-header">
+          <h5 class=" title">Tambah Ibu Hamil</h5>
+        </div>
+        <div class=" card-body">
+          <form [formGroup]="form">
+            <div class=" row">
+              <div class=" col-md-6 pr-md-1">
+                <div class=" form-group">
+                  <label> NIK Ibu </label>
+                  <input class=" form-control" formControlName="nik_ibu" placeholder="NIK Ibu" type="number" />
+                </div>
+              </div>
+              <div class=" col-md-6 px-md-1">
+                <div class=" form-group">
+                  <label> Nama Ibu </label>
+                  <input class=" form-control" formControlName="nama_ibu" placeholder="Nama Ibu" type="text" />
+                </div>
+              </div>
+            </div>
+            <div class=" row">
+              <div class=" col-md-4 pr-md-1">
+                <div class=" form-group">
+                  <label> NIK Ayah </label>
+                  <input class=" form-control" formControlName="nik_ayah" placeholder="NIK Ayah" type="number" />
+                </div>
+              </div>
+              <div class=" col-md-4 px-md-1">
+                <div class=" form-group">
+                  <label> Nama Ayah </label>
+                  <input class=" form-control" formControlName="nama_ayah" placeholder="Nama Ayah" type="text" />
+                </div>
+              </div>
+              <div class=" col-md-4 pl-md-1">
+                <div class=" form-group">
+                  <label> No. Telepon </label>
+                  <input class=" form-control" formControlName="noHp" placeholder="No. Telepon" type="number" />
+                </div>
+              </div>
+            </div>
+            <div class=" row">
+              <div class=" col-md-12">
+                <div class=" form-group">
+                  <label> Alamat </label>
+                  <input class=" form-control" formControlName="alamat" placeholder="Alamat" type="textarea" />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class=" card-footer">
+          <button (click)="onSave()" class=" btn btn-fill btn-danger" type="submit">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
