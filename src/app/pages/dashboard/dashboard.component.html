@@ -65,8 +65,8 @@
                   <td>{{data.noHp}}</td>
                   <td>{{data.alamat}}</td>
                   <td class=" text-center">
-                    <i data-toggle="tooltip" data-placement="top" title="Tambah Riwayat" class=" tim-icons icon-simple-add action-class"> </i>
-                    <i data-toggle="tooltip" data-placement="top" title="Riwayat" class=" tim-icons icon-book-bookmark action-class"> </i>
+                    <i data-toggle="tooltip" (click)="tambahkunjunganibuhamil(data)" data-placement="top" title="Tambah Riwayat" class=" tim-icons icon-simple-add action-class"> </i>
+                    <i data-toggle="tooltip" (click)="riwayatIbu(data)" data-placement="top" title="Riwayat" class=" tim-icons icon-book-bookmark action-class"> </i>
                   </td>
                 </tr>
               </tbody>

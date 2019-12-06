@@ -68,8 +68,18 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/tambah-kunjungan-balita'])
   }
 
+  tambahkunjunganibuhamil(data) {
+    sessionStorage.setItem('dataIbuHamil', JSON.stringify(data));
+    this.router.navigate(['/tambah-kunjungan-ibu-hamil'])
+  }
+
   riwayat(data) {
     sessionStorage.setItem('data', JSON.stringify(data));
     this.router.navigate(['/riwayat-balita'])
+  }
+
+  riwayatIbu(data) {
+    sessionStorage.setItem('dataIbuHamil', JSON.stringify(data));
+    this.router.navigate(['/riwayat-ibu-hamil'])
   }
 }

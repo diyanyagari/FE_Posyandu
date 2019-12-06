@@ -11,6 +11,8 @@ import { TambahBalitaComponent } from "../../pages/tambah-balita/tambah-balita.c
 import { TambahIbuHamilComponent } from "../../pages/tambah-ibu-hamil/tambah-ibu-hamil.component";
 import { TambahKunjunganBalitaComponent } from "../../pages/tambah-kunjungan-balita/tambah-kunjungan-balita.component";
 import { RiwayatBalitaComponent } from "../../pages/riwayat-balita/riwayat-balita.component";
+import { TambahKunjunganIbuHamilComponent } from '../../pages/tambah-kunjungan-ibu-hamil/tambah-kunjungan-ibu-hamil.component';
+import { RiwayatIbuHamilComponent } from '../../pages/riwayat-ibu-hamil/riwayat-ibu-hamil.component';
 // import { RtlComponent } from "../../pages/rtl/rtl.component";
 
 export const AdminLayoutRoutes: Routes = [
@@ -25,5 +27,7 @@ export const AdminLayoutRoutes: Routes = [
   { path: "typography", component: TypographyComponent },
   { path: "tambah-kunjungan-balita", component: TambahKunjunganBalitaComponent },
   { path: "riwayat-balita", component: RiwayatBalitaComponent },
+  { path: "tambah-kunjungan-ibu-hamil", component: TambahKunjunganIbuHamilComponent },
+  { path: "riwayat-ibu-hamil", component: RiwayatIbuHamilComponent },
   // { path: "rtl", component: RtlComponent }
 ];

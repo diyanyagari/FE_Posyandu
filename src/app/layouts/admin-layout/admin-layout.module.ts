@@ -16,6 +16,8 @@ import { TablesComponent } from "../../pages/tables/tables.component";
 import { TypographyComponent } from "../../pages/typography/typography.component";
 import { TambahKunjunganBalitaComponent } from "../../pages/tambah-kunjungan-balita/tambah-kunjungan-balita.component";
 import { RiwayatBalitaComponent } from '../../pages/riwayat-balita/riwayat-balita.component';
+import { TambahKunjunganIbuHamilComponent } from '../../pages/tambah-kunjungan-ibu-hamil/tambah-kunjungan-ibu-hamil.component';
+import { RiwayatIbuHamilComponent } from '../../pages/riwayat-ibu-hamil/riwayat-ibu-hamil.component';
 // import { RtlComponent } from "../../pages/rtl/rtl.component";
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -40,6 +42,8 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     NotificationsComponent,
     RiwayatBalitaComponent,
     TambahKunjunganBalitaComponent,
+    TambahKunjunganIbuHamilComponent,
+    RiwayatIbuHamilComponent,
     MapComponent,
     // RtlComponent
   ]
