@@ -43,7 +43,7 @@
     <div class=" col-md-12">
       <div class=" card">
         <div class=" card-header">
-          <h4 class=" card-title">Data Ibu Hamil</h4>
+          <h4 class=" card-title">Data Ibu Hamil <i data-toggle="tooltip" data-placement="right" title="Cetak" (click)="exportAsXLSX('IH')" class=" tim-icons icon-paper action-class"></i></h4>
         </div>
         <div class=" card-body">
           <div [ngClass]="{'table-responsive':dataIbuHamil.length>5}" class=" ">
@@ -78,7 +78,8 @@
     <div class=" col-md-12">
       <div class=" card">
         <div class=" card-header">
-          <h4 class=" card-title">Data Balita</h4>
+          <h4 class=" card-title">Data Balita <i data-toggle="tooltip" data-placement="right" title="Cetak" (click)="exportAsXLSX('B')" class=" tim-icons icon-paper action-class"> </i></h4>
+          
         </div>
         <div class=" card-body">
           <div [ngClass]="{'table-responsive':dataBalita.length>5}" class=" ">
