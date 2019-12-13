@@ -41,7 +41,9 @@ export class TambahKunjunganBalitaComponent implements OnInit {
       'jenisImunisasi': new FormControl('', Validators.required),
       'id': new FormControl('', Validators.required),
       'jk': new FormControl('', Validators.required),
-      'keteranganPemberianVitamin': new FormControl('', Validators.required)
+      'keteranganPemberianVitamin': new FormControl('', Validators.required),
+      'pemberianObat': new FormControl('', Validators.required),
+      'cekGizi': new FormControl('', Validators.required)
     });
     let x = new Date();
     let hari = x.getDay() + 1;
@@ -81,7 +83,7 @@ export class TambahKunjunganBalitaComponent implements OnInit {
         bulan = (12 - birthday.getMonth()) + datenow.getMonth()
       }
     }
-    this.umur = umurTahun + ' Tahun ' + bulan + ' Bulan' 
+    this.umur = umurTahun + ' Tahun ' + bulan + ' Bulan'
   }
 
   onChange(val) {
@@ -102,7 +104,7 @@ export class TambahKunjunganBalitaComponent implements OnInit {
   onSave() {
     let datenow = new Date(this.form.get('tgl_kunjungan').value);
     let birthday = new Date(this.dataBalita.tgl_lahir);
-    if(datenow < birthday) {
+    if (datenow < birthday) {
       this.toastr.warning('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Tanggal Kunjungan Melebihi Tanggal Lahir', '', {
         closeButton: true,
         enableHtml: true,
@@ -121,7 +123,7 @@ export class TambahKunjunganBalitaComponent implements OnInit {
       if (umurTahun < 0) {
         umurTahun = 0;
       }
-  
+
       let bulan;
       if (datenow.getFullYear() - birthday.getFullYear() == 0) {
         bulan = datenow.getMonth() - birthday.getMonth();
@@ -132,7 +134,7 @@ export class TambahKunjunganBalitaComponent implements OnInit {
           bulan = (12 - birthday.getMonth()) + datenow.getMonth()
         }
       }
-  
+
       let beratIdeal = 2 * (umurTahun + (bulan / 10)) + 8;
       let toleransi = 2;
       let beratSekarang = this.form.get('beratbadan').value
@@ -152,7 +154,9 @@ export class TambahKunjunganBalitaComponent implements OnInit {
         'tinggi': this.form.get('tinggi').value,
         'jenisImunisasi': this.form.get('jenisImunisasi').value,
         'keteranganPemberianVitamin': this.form.get('keteranganPemberianVitamin').value,
-        'sttsGizi': sttsGizi
+        'sttsGizi': sttsGizi,
+        'cekGizi': this.form.get('cekGizi').value,
+        'pemberianObat': this.form.get('pemberianObat').value,
       }
       this.api.add(this.url + 'insertKunjungan', dataKirim).subscribe(res => {
         this.getKunjungan();

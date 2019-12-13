@@ -129,6 +129,7 @@ export class DashboardComponent implements OnInit {
                 }
                 let dataTemp = {
                   'Tanggal Kunjungan': tglHari + '/' + bln + '/' + x.getFullYear(),
+                  'ID Balita': ress.values[j].id_balita,
                   'Nama Balita': ress.values[j].nama_balita,
                   'Tanggal Lahir': tglHariY + '/' + blnY + '/' + y.getFullYear(),
                   'Umur': ress.values[j].umurTahun,
@@ -137,7 +138,9 @@ export class DashboardComponent implements OnInit {
                   'Nama Ayah': ress.values[j].nama_ayah,
                   'Berat Badan': res.values[i].beratbadan,
                   'Tinggi': res.values[i].tinggi,
+                  'Imunisasi': res.values[i].jenisImunisasi,
                   'Keterangan Pemberian Vitamin': res.values[i].keteranganPemberianVit,
+                  'Pemberian Obat': res.values[i].pemb_obat,
                   'Status Gizi': res.values[i].sttsGizi
                 }
                 dataPrint.push(dataTemp)
@@ -186,5 +189,56 @@ export class DashboardComponent implements OnInit {
         });
       })
     }
+  }
+
+  exportAsXLSXperONE(id): void {
+    let dataPrint: any = [];
+    this.api.add(this.url + 'viewKunjunganBalita', { 'id_balita': id }).subscribe(res => {
+      this.api.get(this.url + 'viewBalita').subscribe(ress => {
+        for (let i = 0; i < res.values.length; i++) {
+          for (let j = 0; j < ress.values.length; j++) {
+            if (ress.values[j].id_balita == res.values[i].id_balita) {
+              let x = new Date(res.values[i].tgl_kunjungan);
+              let hari = x.getDay() + 1;
+              let tglHari;
+              let bln: number = x.getMonth() + 1;
+              if (hari.toString().length == 1) {
+                tglHari = '0' + hari;
+              } else {
+                tglHari = hari;
+              }
+
+              let y = new Date(ress.values[j].tgl_lahir);
+              let hariY = y.getDay() + 1;
+              let tglHariY;
+              let blnY: number = y.getMonth() + 1;
+              if (hariY.toString().length == 1) {
+                tglHariY = '0' + hariY;
+              } else {
+                tglHariY = hariY;
+              }
+              let dataTemp = {
+                'Tanggal Kunjungan': tglHari + '/' + bln + '/' + x.getFullYear(),
+                'ID Balita': ress.values[j].id_balita,
+                'Nama Balita': ress.values[j].nama_balita,
+                'Tanggal Lahir': tglHariY + '/' + blnY + '/' + y.getFullYear(),
+                'Umur': ress.values[j].umurTahun,
+                'Alamat': ress.values[j].alamat,
+                'Nama Ibu': ress.values[j].nama_ibu,
+                'Nama Ayah': ress.values[j].nama_ayah,
+                'Berat Badan': res.values[i].beratbadan,
+                'Tinggi': res.values[i].tinggi,
+                'Imunisasi': res.values[i].jenisImunisasi,
+                'Keterangan Pemberian Vitamin': res.values[i].keteranganPemberianVit,
+                'Pemberian Obat': res.values[i].pemb_obat,
+                'Status Gizi': res.values[i].sttsGizi
+              }
+              dataPrint.push(dataTemp)
+            }
+          }
+        }
+        this.excelExport.exportAsExcelFile(dataPrint, 'Riwayat Kunjungan Balita');
+      });
+    })
   }
 }

@@ -17,26 +17,26 @@
               <div class=" col-md-3 px-md-1">
                 <div class=" form-group">
                   <label> Tanggal Kunjungan </label>
-                  <input class=" form-control" (change)="getUmur()" formControlName="tgl_kunjungan" placeholder="Tanggal Lahir"
-                    type="date" />
+                  <input class=" form-control" (change)="getUmur()" formControlName="tgl_kunjungan"
+                    placeholder="Tanggal Lahir" type="date" />
                 </div>
               </div>
               <div class=" col-md-2 px-md-1">
                 <div class=" form-group">
                   <label> Umur </label>
-                  <input disabled class=" form-control" value="{{umur}}" placeholder="Umur"
-                    type="text" />
+                  <input disabled class=" form-control" value="{{umur}}" placeholder="Umur" type="text" />
                 </div>
               </div>
               <div class=" col-md-3 pr-md-1">
                 <div class=" form-group">
                   <label> Jenis Kunjungan </label>
-                  <select [(ngModel)]="kodeKunjungan" (change)="onChange($event.target.value)" formControlName="id_jenis_kunjungan"
-                    class=" form-control">
+                  <select [(ngModel)]="kodeKunjungan" (change)="onChange($event.target.value)"
+                    formControlName="id_jenis_kunjungan" class=" form-control">
                     <option value="BB">Periksa BB dan Tinggi</option>
                     <option value="IM">Imunisasi</option>
                     <option value="PV">Pemberian Vitamin</option>
                     <option value="CG">Cek status Gizi</option>
+                    <option value="PO">Pemberian Obat</option>
                   </select>
                 </div>
               </div>
@@ -78,7 +78,20 @@
               </div>
             </div>
             <div *ngIf="kodeKunjungan == 'CG'" class=" row">
-
+              <div class=" col-md-4 pr-md-1">
+                <div class=" form-group">
+                  <label> Status Gizi </label>
+                  <input class=" form-control" formControlName="cekGizi" placeholder="Status Gizi" type="text" />
+                </div>
+              </div>
+            </div>
+            <div *ngIf="kodeKunjungan == 'PO'" class=" row">
+              <div class=" col-md-4 pr-md-1">
+                <div class=" form-group">
+                  <label> Pemberian Obat </label>
+                  <input class=" form-control" formControlName="pemberianObat" placeholder="Pemberian Obat" type="text" />
+                </div>
+              </div>
             </div>
           </form>
         </div>
@@ -101,6 +114,7 @@
                 <th>Tinggi</th>
                 <th>Jenis Imunisasi</th>
                 <th>Keterangan Pemberian Vitamin</th>
+                <th>Obat</th>
                 <th>Status Gizi</th>
                 <!-- <th class=" text-center">Salary</th> -->
               </tr>
@@ -112,6 +126,7 @@
                 <td>{{data.tinggi}} Cm</td>
                 <td>{{data.jenisImunisasi}}</td>
                 <td>{{data.keteranganPemberianVit}}</td>
+                <td>{{data.pemb_obat}}</td>
                 <td>{{data.sttsGizi}}</td>
                 <!-- <td class=" text-center">
                   <i data-toggle="tooltip" (click)="tambahkunjunganbalita(data)" data-placement="top"

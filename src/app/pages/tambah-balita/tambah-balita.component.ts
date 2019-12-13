@@ -83,19 +83,22 @@ export class TambahBalitaComponent implements OnInit {
       year = 1;
     }
     let umurTahun = datenow.getFullYear() - birthday.getFullYear() - year;
-    let umurBulan;
-    let umurHari;
     if (umurTahun < 0) {
       umurTahun = 0;
     }
 
-    if ((datenow.getMonth() < birthday.getMonth()) && (datenow.getFullYear() == birthday.getFullYear())) {
-    	umurBulan = birthday.getMonth() - datenow.getMonth();
-    } else if ((datenow.getMonth() > birthday.getMonth()) && (datenow.getFullYear() == birthday.getFullYear())) {
-    	umurBulan = datenow.getMonth() - birthday.getMonth();
+    let bulan;
+    if (datenow.getFullYear() - birthday.getFullYear() == 0) {
+      bulan = datenow.getMonth() - birthday.getMonth();
+    } else if (datenow.getFullYear() > birthday.getFullYear()) {
+      if (datenow.getMonth() > birthday.getMonth()) {
+        bulan = datenow.getMonth() - birthday.getMonth();
+      } else if (datenow.getMonth() < birthday.getMonth()) {
+        bulan = (12 - birthday.getMonth()) + datenow.getMonth()
+      }
     }
 
-    this.form.get('umur').setValue(umurTahun)
+    this.form.get('umur').setValue(umurTahun + ' Tahun ' + bulan + ' Bulan')
   }
 
 }
